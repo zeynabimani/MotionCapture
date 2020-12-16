@@ -12,54 +12,74 @@ BW2 = I2gray > level;
 subplot(1,2,1), imshow(BW1)
 subplot(1,2,2), imshow(BW2)
 
+k = 1; %number of markers in the image view
+
 %%find contours
-%%find contour areas - find max 2 area - find center of these max areas
-areas1 = regionprops(BW1, 'Area');  %find eareas of all contours in img1
-areas1 = cell2mat(struct2cell(areas1)); %convert struct to array in img1
-areas1_m = maxk(areas1,2);  %find 2 biggest areas in img1
-areas1_m_i = zeros(1,2);    %find index of 2 biggest areas in img1
-areas1_m_i(1) = find(areas1 == areas1_m(1));
-areas1_m_i(2) = find(areas1 == areas1_m(2));
-areas2 = regionprops(BW2, 'Area');  %find eareas of all contours in img2
-areas2 = cell2mat(struct2cell(areas2)); %convert struct to array in img2
-areas2_m = maxk(areas2,2);  %find 2 biggest areas in img2
-areas2_m_i = zeros(1,2);    %find index of 2 biggest areas in img2
-areas2_m_i(1) = find(areas2 == areas2_m(1));
-areas2_m_i(2) = find(areas2 == areas2_m(2));
-center1 = regionprops(BW1, 'Centroid');  %find centers of all contours in img1
-center1 = cell2mat(struct2cell(center1)); %convert struct to array in img2
-center1_m = zeros(2,2); %find 2 centers areas in img2
-center1_m(1,:) = center1(1,areas1_m_i(1)*2-1:areas1_m_i(1)*2);
-center1_m(2,:) = center1(1,areas1_m_i(2)*2-1:areas1_m_i(2)*2);
-center2 = regionprops(BW2, 'Centroid');  %find centers of all contours in img2
-center2 = cell2mat(struct2cell(center2)); %convert struct to array in img2
-center2_m = zeros(2,2); %find 2 centers areas in img2
-center2_m(1,:) = center2(1,areas2_m_i(1)*2-1:areas2_m_i(1)*2);
-center2_m(2,:) = center2(1,areas2_m_i(2)*2-1:areas2_m_i(2)*2);
-
-[B1,L1] = bwboundaries(BW1,'noholes');
-[B2,L2] = bwboundaries(BW2,'noholes');
-%%draw contours
-figure
-subplot(1,2,1);
-imshow(label2rgb(L1, @jet, [.5 .5 .5]))
-hold on
-for k = 1:length(B1)
-   boundary = B1{k};
-   plot(boundary(:,2), boundary(:,1), 'w', 'LineWidth', 2)
+%%find eareas of all contours
+areas1 = regionprops(BW1, 'Area');  
+areas2 = regionprops(BW2, 'Area');
+%convert struct to array
+areas1 = cell2mat(struct2cell(areas1)); 
+areas2 = cell2mat(struct2cell(areas2));
+%find k biggest areas
+areas1_max = maxk(areas1,k);  
+areas2_max = maxk(areas2,k);
+%find index of k biggest areas
+areas1_max_index = zeros(1,k);
+areas2_max_index = zeros(1,k);
+for i=1:k
+    areas1_max_index(i) = find(areas1 == areas1_max(i));
+    areas2_max_index(i) = find(areas2 == areas2_max(i));
 end
-plot(center1_m(1,1),center1_m(1,2),'o','Color','w','MarkerSize',6,'MarkerFaceColor','w')
-plot(center1_m(2,1),center1_m(2,2),'o','Color','w','MarkerSize',6,'MarkerFaceColor','w')
 
-subplot(1,2,2);
-imshow(label2rgb(L2, @jet, [.5 .5 .5]))
-hold on
-for k = 1:length(B2)
-   boundary = B2{k};
-   plot(boundary(:,2), boundary(:,1), 'w', 'LineWidth', 2)
+%find centers of all contours
+center1 = regionprops(BW1, 'Centroid');  
+center2 = regionprops(BW2, 'Centroid');  
+%convert struct to array
+center1 = cell2mat(struct2cell(center1)); 
+center2 = cell2mat(struct2cell(center2));
+%find k centers 
+center1_max = zeros(k,2); 
+center2_max = zeros(k,2);
+for i=1:k
+    center1_max(i,:) = center1(1,areas1_max_index(i)*2-1:areas1_max_index(i)*2);
+    center2_max(i,:) = center2(1,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
 end
-plot(center2_m(1,1),center2_m(1,2),'o','Color','w','MarkerSize',6,'MarkerFaceColor','w')
-plot(center2_m(2,1),center2_m(2,2),'o','Color','w','MarkerSize',6,'MarkerFaceColor','w')
+
+%find corners of all contours
+corners1 = regionprops(BW1, 'Extrema');  
+corners2 = regionprops(BW2, 'Extrema');  
+%convert struct to array
+corners1 = cell2mat(struct2cell(corners1)); 
+corners2 = cell2mat(struct2cell(corners2));
+%find k corners
+corners1_max = zeros(k,8,2); 
+corners2_max = zeros(k,8,2);
+for i=1:k
+    corners1_max(i,:,:) = corners1(:,areas1_max_index(i)*2-1:areas1_max_index(i)*2);
+    corners2_max(i,:,:) = corners2(:,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
+end
+   
+points1 = zeros(k,9,2); 
+points2 = zeros(k,9,2); 
+points1(:,1,:) = center1_max;
+points2(:,1,:) = center2_max;
+points1(:,2:9,:) = corners1_max;
+points2(:,2:9,:) = corners2_max;
 
 
-epi2(I1gray, I2gray, center1_m, center2_m);
+subplot(1,2,1), imshow(I1);
+hold on
+colors = ["#f44336", "#9C27B0", "#2196F3", "#4CAF50", "#FFEB3B", "#FF5722", "#3F51B5", "#E91E63", "#18FFFF"];
+for i=1:size(points1,2)
+   for j=1:k
+       plot(points1(j,i,1),points1(j,i,2),'o','Color',char(colors(i)),'MarkerSize',3)
+   end
+end
+subplot(1,2,2), imshow(I2);
+hold on
+for i=1:size(points2,2)
+   for j=1:k
+       plot(points2(j,i,1),points2(j,i,2),'o','Color',char(colors(i)),'MarkerSize',3)
+   end
+end
