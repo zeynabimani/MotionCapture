@@ -1,4 +1,4 @@
-function [points1, points2] = markers(I1, I2, K, show)
+function [center1_max, center2_max] = markers(I1, I2, K, show)
 
     % I1 = imread("75_1.jpg");
     % I2 = imread("75_2.jpg");
