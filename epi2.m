@@ -1,4 +1,5 @@
 function epi2(img1, img2, center1, center2)
+    %%load result of estimateFundamentalMatrix for 2 chess board image
     load('F_KAZE');
     %epiLines in img1
     subplot(1,2,1),imshow(img1);

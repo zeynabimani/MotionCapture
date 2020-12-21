@@ -1,4 +1,4 @@
-function [center1_max, center2_max] = markers(I1, I2, K, show)
+function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
 
     % I1 = imread("75_1.jpg");
     % I2 = imread("75_2.jpg");
@@ -11,8 +11,8 @@ function [center1_max, center2_max] = markers(I1, I2, K, show)
     level = 50;
     BW1 = I1gray > level;
     BW2 = I2gray > level;
-    subplot(1,2,1), imshow(BW1)
-    subplot(1,2,2), imshow(BW2)
+%     subplot(1,2,1), imshow(BW1)
+%     subplot(1,2,2), imshow(BW2)
 
 %%%     k = 1; %number of markers in the image view
 
