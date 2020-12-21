@@ -1,6 +1,6 @@
 function epi2(img1, img2, center1, center2)
     load('F_KAZE');
-   %epiLines in img1
+    %epiLines in img1
     subplot(1,2,1),imshow(img1);
     %epiLines in img2
     subplot(1,2,2),imshow(img2);
