@@ -1,10 +1,10 @@
-%%default
-cam2.Exposure = -4;
-cam3.Exposure = -4;
-
-%%very dark
-cam2.Exposure = 0;
-cam3.Exposure = 0;
+% %%default
+% cam2.Exposure = -4;
+% cam3.Exposure = -4;
+% 
+% %%very dark
+% cam2.Exposure = 0;
+% cam3.Exposure = 0;
 
 counter = 1;
 
@@ -25,7 +25,7 @@ frame3 = imread("75_2.jpg");
     point3d = reconstruct3d(frame2, frame3, center1, center2);
     %%find equivalent of each marker
     epi2(BW1, BW2, center1, center2)
-    
+        
 %     %%saving images
 %     path = 'calibration/' + string(counter);
 %     imwrite(frame2,path + '_1.jpg');

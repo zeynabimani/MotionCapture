@@ -1,0 +1,15 @@
+default camera parameters:
+
+
+                     Name: 'Logitech HD Webcam C270'
+     AvailableResolutions: {1×19 cell}
+               Resolution: '640x480'
+             ExposureMode: 'auto'
+    BacklightCompensation: 0
+               Saturation: 32
+                 Contrast: 32
+                 Exposure: -4
+             WhiteBalance: 4000
+                Sharpness: 24
+               Brightness: 128
+                     Gain: 64
