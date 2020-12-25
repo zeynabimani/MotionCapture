@@ -1,4 +1,4 @@
-function epi2(img1, img2, center1, center2)
+function lineAllocate = epi2(img1, img2, center1, center2)
     %%load result of estimateFundamentalMatrix for 2 chess board image
     load('results/F_KAZE');
     %epiLines in img1
@@ -16,5 +16,4 @@ function epi2(img1, img2, center1, center2)
         plot(center2(i,1),center2(i,2),'o','Color',color,'MarkerSize',3);
         line(points2(lineAllocate(i),[1,3])',points2(lineAllocate(i),[2,4])','Color',color);
     end
-    
 end
