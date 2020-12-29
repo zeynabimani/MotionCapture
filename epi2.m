@@ -1,6 +1,6 @@
 function lineAllocate = epi2(img1, img2, center1, center2)
     %%load result of estimateFundamentalMatrix for 2 chess board image
-    load('results/F_KAZE');
+    load('F:/MotionCapture/results/F_KAZE');
     %epiLines in img1
     subplot(1,2,1),imshow(img1);
     %epiLines in img2

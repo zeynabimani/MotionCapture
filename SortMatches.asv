@@ -1,0 +1,12 @@
+function Center2=SortMatches(maches,center2)
+disp(center
+for i=1:size(maches)
+if maches(i)~=i
+    temp=center2(i,:);
+    center2(i,:)=center2(maches(i),:);
+    center2(maches(i),:)=temp;
+    
+end
+  Center2=center2;
+  disp(Center2);
+end
