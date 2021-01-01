@@ -45,13 +45,13 @@
     if i==1
          fid = fopen('F:\MotionCapture\result.txt','w');
 %          fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
-         fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+         fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance+"mm","-------------------------------------------------------------------------------------------------");
          fclose(fid);
  
     else 
        fid = fopen('F:\MotionCapture\result.txt','a');
 %        fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
-       fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance+"mm","-------------------------------------------------------------------------------------------------");
        fclose(fid);
     end
    
