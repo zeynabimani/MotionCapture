@@ -6,7 +6,7 @@
 % cam2.Exposure = 0;
 % cam3.Exposure = 0;
 
-counter = 1;
+%counter = 1;
 
 % frame2 = imread("75_1.jpg");
 % frame3 = imread("75_2.jpg");
@@ -33,15 +33,27 @@ counter = 1;
     [BW1, BW2, center1, center2] = markers(frame2,frame3, 2, false);
     %%find equivalent of each marker
     maches = epi2(BW1, BW2, center1, center2);
+%     disp(i);
+%     disp(maches);
    
     center2=SortMatches(maches,center2);%% sorted algorithm
     %%get marker's 3d pose in the world coordinate 
     point3d = reconstruct3d(frame2,frame3, center1, center2);   %%should be sorted
     distance=sqrt(((point3d(1,1)-point3d(2,1)).^2)+(((point3d(1,2)-point3d(2,2)).^2))+(((point3d(1,3)-point3d(2,3)).^2)));
     disp(distance);
-    fid = fopen('F:\MotionCapture\my.txt','a+');
-    fprintf(fid,'%s\n%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"point3d   "+point3d,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
-    fclose(fid);
+    
+    if i==1
+         fid = fopen('F:\MotionCapture\result.txt','w');
+%          fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+         fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+         fclose(fid);
+ 
+    else 
+       fid = fopen('F:\MotionCapture\result.txt','a');
+%        fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fclose(fid);
+    end
    
     end
    
