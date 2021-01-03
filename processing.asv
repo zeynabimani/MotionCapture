@@ -16,7 +16,8 @@
 %     frame2 = snapshot(cam2);
 %     frame3 = snapshot(cam3);
 
-   
+   sum=0;
+   A=zeros(1,20);
     for i=1:20
        path="C:/Users/almas/Documents/test/2/20/";
        frame2=imread(path+int2str(i)+"_1.jpg");
@@ -41,19 +42,27 @@
     point3d = reconstruct3d(frame2,frame3, center1, center2);   %%should be sorted
     distance=sqrt(((point3d(1,1)-point3d(2,1)).^2)+(((point3d(1,2)-point3d(2,2)).^2))+(((point3d(1,3)-point3d(2,3)).^2)));
     disp(distance);
-    
+    sum=sum+distance;
+    A(i)=distance;
     if i==1
-         fid = fopen('F:\MotionCapture\my.txt','w');
-         fprintf(fid,'%s\n%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"point3d   "+point3d,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+         fid = fopen('F:\MotionCapture\result.txt','w');
+%          fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+          fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance*0.10+"cm","-------------------------------------------------------------------------------------------------");
          fclose(fid);
  
     else 
-       fid = fopen('F:\MotionCapture\my.txt','a');
-       fprintf(fid,'%s\n%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"point3d   "+point3d,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fid = fopen('F:\MotionCapture\result.txt','a');
+%        fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance*0.10+"cm","-------------------------------------------------------------------------------------------------");
        fclose(fid);
     end
    
     end
+     fid = fopen('F:\MotionCapture\result.txt','a');
+%        fprintf(fid,'%s\n%s\n%s\n%s\n%s\n',"Frame"+int2str(i),"center1  "+center1, "center2  "+center2,"distance    "+distance,"-------------------------------------------------------------------------------------------------");
+       fprintf(fid,'%s\n%s\n%s\n',"Frame"+int2str(i),"distance    "+distance*0.10+"cm","-------------------------------------------------------------------------------------------------");
+       fclose(fid);
+    
    
     
     
