@@ -1,3 +1,0 @@
-Average   74.5964
-Variance    0.10687
-Num    24

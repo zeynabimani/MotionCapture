@@ -1,6 +1,6 @@
-function lineAllocate = epi2(img1, img2, center1, center2)
+function lineAllocate = epi2(img1, img2, center1, center2, num)
     %%load result of estimateFundamentalMatrix for 2 chess board image
-    load('F:\MotionCapture\results\F_KAZE');
+    load('results/F_KAZE');
 
     epiLines2 = epipolarLine(fLMedS,center1);
     points2 = lineToBorderPoints(epiLines2,size(img2));
@@ -32,14 +32,14 @@ function lineAllocate = epi2(img1, img2, center1, center2)
         color = [rand,rand,rand];
         colors = [colors
                   color];
-        plot(center1(i,1),center1(i,2),'o','Color',color,'MarkerSize',3);
+        plot(center1(i,1),center1(i,2),'o','Color',color,'MarkerSize',15);
     end
     %epiLines in img2
     subplot(1,2,2),imshow(img2);
     hold on;
     for i=1:size(center2,1)
-        plot(center2(lineAllocate(i),1),center2(lineAllocate(i),2),'o','Color',colors(i, :),'MarkerSize',3);
-        line(points2(lineAllocate(i),[1,3])',points2(lineAllocate(i),[2,4])','Color',colors(i, :));
+        plot(center2(lineAllocate(i),1),center2(lineAllocate(i),2),'o','Color',colors(i, :),'MarkerSize',15);
+        line(points2(i,[1,3])',points2(i,[2,4])','Color',colors(i, :));
     end
-    
+    saveas(gcf,string("res/" + string(num) + ".jpg"));
 end
