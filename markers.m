@@ -52,7 +52,7 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
             end
             areas2_max_index(i) = tmp(index2);
             lastBad2 = areas2_max(i);
-            index1 = index2 + 1;
+            index2 = index2 + 1;
         else
             areas2_max_index(i) = tmp;
         end
