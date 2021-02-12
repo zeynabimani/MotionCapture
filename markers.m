@@ -30,18 +30,28 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
     areas1_max_index = zeros(1,K);
     areas2_max_index = zeros(1,K);
     index1 = 1;
+    lastBad1 = 0;
     index2 = 1;
+    lastBad2 = 0;
     for i=1:K
         tmp = find(areas1 == areas1_max(i));
         if size(tmp,2) > 1
+            if lastBad1 ~= areas1_max(i)
+                index1 = 1;
+            end
             areas1_max_index(i) = tmp(index1);
+            lastBad1 = areas1_max(i);
             index1 = index1 + 1;
         else
             areas1_max_index(i) = tmp;
         end
         tmp = find(areas2 == areas2_max(i));
         if size(tmp,2) > 1
+            if lastBad2 ~= areas2_max(i)
+                index2 = 1;
+            end
             areas2_max_index(i) = tmp(index2);
+            lastBad2 = areas2_max(i);
             index1 = index2 + 1;
         else
             areas2_max_index(i) = tmp;
@@ -62,38 +72,17 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
         center2_max(i,:) = center2(1,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
     end
 
-    %find corners of all contours
-    corners1 = regionprops(BW1, 'Extrema');  
-    corners2 = regionprops(BW2, 'Extrema');  
-    %convert struct to array
-    corners1 = cell2mat(struct2cell(corners1)); 
-    corners2 = cell2mat(struct2cell(corners2));
-    %find k corners
-    corners1_max = zeros(K,8,2); 
-    corners2_max = zeros(K,8,2);
-    for i=1:K
-        corners1_max(i,:,:) = corners1(:,areas1_max_index(i)*2-1:areas1_max_index(i)*2);
-        corners2_max(i,:,:) = corners2(:,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
-    end
-
-    points1 = zeros(K,9,2); 
-    points2 = zeros(K,9,2); 
-    points1(:,1,:) = center1_max;
-    points2(:,1,:) = center2_max;
-    points1(:,2:9,:) = corners1_max;
-    points2(:,2:9,:) = corners2_max;
-
     if show == true
         subplot(1,2,1), imshow(I1);
         hold on
-        colors = ["#f44336", "#9C27B0", "#2196F3", "#4CAF50", "#FFEB3B", "#FF5722", "#3F51B5", "#E91E63", "#18FFFF"];
+        color = [rand,rand,rand];
         for i=1:size(center1_max,2)
-           plot(center1_max(i,1),center1_max(i,2),'o','Color',char(colors(i)),'MarkerSize',3)
+           plot(center1_max(i,1),center1_max(i,2),'o','Color',color,'MarkerSize',3)
         end
         subplot(1,2,2), imshow(I2);
         hold on
         for i=1:size(center2_max,2)
-            plot(center2_max(i,1),center2_max(i,2),'o','Color',char(colors(i)),'MarkerSize',3)
+            plot(center2_max(i,1),center2_max(i,2),'o','Color',color,'MarkerSize',3)
         end
     end
 end

@@ -1,6 +1,6 @@
 
-I1 = imread("24_1.jpg");
-I2 = imread("24_2.jpg");
+I1 = imread("results/10_1.jpg");
+I2 = imread("results/10_2.jpg");
 
 %%single channel image
 I1gray = rgb2gray(I1);
