@@ -8,8 +8,8 @@
 
 counter = 1;
 
-frame2 = imread("check/test/43_1.jpg");
-frame3 = imread("check/test/43_2.jpg");
+frame2 = imread("check/10/5_1.jpg");
+frame3 = imread("check/10/5_2.jpg");
 
 % while true 
 %    %%acquire a single image from webcams
@@ -18,9 +18,14 @@ frame3 = imread("check/test/43_2.jpg");
 
 %     subplot(1,2,1), imshow(frame2)
 %     subplot(1,2,2), imshow(frame3)
-%     
+%    
+    N = 14;
     %get marker centers
-    [BW1, BW2, center1, center2] = markers(frame2, frame3, 14, true);
+    [BW1, BW2, center1, center2] = markers(frame2, frame3, N, true);
+    %tracking
+    mean_points = Tracker(frame2,N);
+    matches = findMatches(center1, mean_points);
+    center1=SortMatches(maches,center1);
     %find equivalent of each marker
     maches = epi2(BW1, BW2, center1, center2, 28);
     %sorting
