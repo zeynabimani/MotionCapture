@@ -1,4 +1,4 @@
-function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
+function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show, num)
 
     % I1 = imread("75_1.jpg");
     % I2 = imread("75_2.jpg");
@@ -8,11 +8,11 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
     I2gray = rgb2gray(I2);
 
     %%thresholding
-    level = 60;
+    level = 35;
     BW1 = I1gray > level;
     BW2 = I2gray > level;
-%     subplot(1,2,1), imshow(BW1)
-%     subplot(1,2,2), imshow(BW2)
+    subplot(1,2,1), imshow(BW1)
+    subplot(1,2,2), imshow(BW2)
 
 %%%     k = 1; %number of markers in the image view
 
@@ -71,18 +71,18 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show)
         center1_max(i,:) = center1(1,areas1_max_index(i)*2-1:areas1_max_index(i)*2);
         center2_max(i,:) = center2(1,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
     end
-
+   colors = colorcube(K);
     if show == true
         subplot(1,2,1), imshow(I1);
         hold on
-        color = [rand,rand,rand];
-        for i=1:size(center1_max,2)
-           plot(center1_max(i,1),center1_max(i,2),'o','Color',color,'MarkerSize',3)
+        for i=1:size(center1_max,1)
+           plot(center1_max(i,1),center1_max(i,2),'o','Color',colors(i,:),'MarkerSize',10)
         end
         subplot(1,2,2), imshow(I2);
         hold on
-        for i=1:size(center2_max,2)
-            plot(center2_max(i,1),center2_max(i,2),'o','Color',color,'MarkerSize',3)
+        for i=1:size(center2_max,1)
+            plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',10)
         end
+        saveas(gcf,string("res/1_" + string(num) + ".jpg"));
     end
 end

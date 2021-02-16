@@ -55,19 +55,16 @@ function lineAllocate = epi2(img1, img2, center1, center2, num)
     %epiLines in img2
     subplot(1,2,2),imshow(img2);
     hold on;
-    colors = [];
+    colors = colorcube(size(center2,1));
     for i=1:size(center2,1)
-        color = [rand,rand,rand];
-        colors = [colors
-                  color];
-        plot(center2(i,1),center2(i,2),'o','Color',color,'MarkerSize',15);
-        line(points2(lineAllocate(i),[1,3])',points2(lineAllocate(i),[2,4])','Color',color);
+        plot(center2(i,1),center2(i,2),'o','Color',colors(i,:),'MarkerSize',10);
+        line(points2(lineAllocate(i),[1,3])',points2(lineAllocate(i),[2,4])','Color',colors(i,:));
     end
     %epiLines in img1
     subplot(1,2,1),imshow(img1);
     hold on;
     for i=1:size(center1,1)
-        plot(center1(lineAllocate(i),1),center1(lineAllocate(i),2),'o','Color',colors(i, :),'MarkerSize',15);
+        plot(center1(lineAllocate(i),1),center1(lineAllocate(i),2),'o','Color',colors(i, :),'MarkerSize',10);
     end
-    saveas(gcf,string("res/" + string(num) + ".jpg"));
+    	
 end
