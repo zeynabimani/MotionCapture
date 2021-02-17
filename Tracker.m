@@ -1,9 +1,8 @@
-function mean_points = Tracker(videoFrame,n)
+function mean_points = Tracker(videoFrame, colors, N, num)
    load('results/all_points');
    load('results/all_trackers');
-   colors = hsv(n);
    colors = round(colors*255);
-   mean_points = zeros(n,2);
+   mean_points = zeros(N,2);
    for k=1:length(all_points)
         oldPoints = all_points{k};
         pointTracker = all_trackers{k};
@@ -21,7 +20,8 @@ function mean_points = Tracker(videoFrame,n)
             % Display tracked points
             videoFrame = insertMarker(videoFrame, visiblePoints, '+', ...
                 'Color', colors(k,:));       
-
+            imwrite(videoFrame,string("res/" + string(num) + "_2.jpg"));
+            
             % Reset the points
             oldPoints = visiblePoints;
             setPoints(pointTracker, oldPoints);        

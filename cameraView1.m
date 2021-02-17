@@ -1,7 +1,7 @@
 N = 14;
 % frame2 = imread('results/first sequence/158_1.jpg');
 % SetMarkers(frame2,N);
-for i=159:171
+for i=159:160
     path = 'results/first sequence/' + string(i);
     frame2 = imread(path + '_1.jpg');
     frame3 = imread(path + '_2.jpg');
@@ -9,9 +9,14 @@ for i=159:171
     colors = hsv(N);
     [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, true, i);
     %tracking
-    mean_points = Tracker(frame2,N);
+    mean_points = Tracker(frame2, colors, N, i);
     matches = findMatches(center1, mean_points);
     center1=SortMatches(matches,center1);
+    videoFrame = frame2;
+    for k=1:N
+        videoFrame = insertMarker(videoFrame, center1(k,:), '+', 'Color', round(colors(k,:)*255));
+    end
+    imwrite(videoFrame,string("res/" + string(i) + "_2.jpg"));
     %find equivalent of each marker
     matches = epi2(BW1, BW2, center1, center2, colors, N, i);
     %sorting

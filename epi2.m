@@ -80,5 +80,5 @@ function lineAllocate = epi2(img1, img2, center1, center2, colors, N, num)
         line(points2(i,[1,3])',points2(i,[2,4])','Color',colors(i,:));
         plot(center2(lineAllocate(i),1),center2(lineAllocate(i),2),'o','Color',colors(i, :),'MarkerSize',5,'LineWidth',3);
     end
-    saveas(gcf,string("res/" + string(num) + "_2.jpg"));
+    saveas(gcf,string("res/" + string(num) + "_3.jpg"));
 end

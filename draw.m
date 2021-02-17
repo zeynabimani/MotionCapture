@@ -9,5 +9,5 @@ function draw(I1, I2, center1, center2, colors, num)
     for i=1:size(center2,1)
         plot(center2(i,1),center2(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
     end
-    saveas(gcf,string("res/" + string(num) + "_3.jpg"));
+    saveas(gcf,string("res/" + string(num) + "_4.jpg"));
 end
