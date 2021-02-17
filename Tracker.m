@@ -1,7 +1,7 @@
 function mean_points = Tracker(videoFrame,n)
    load('results/all_points');
    load('results/all_trackers');
-   colors = colorcube(n);
+   colors = hsv(n);
    colors = round(colors*255);
    mean_points = zeros(n,2);
    for k=1:length(all_points)

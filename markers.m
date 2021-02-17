@@ -1,4 +1,4 @@
-function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show, num)
+function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show, num)
 
     % I1 = imread("75_1.jpg");
     % I2 = imread("75_2.jpg");
@@ -71,18 +71,17 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, K, show, num)
         center1_max(i,:) = center1(1,areas1_max_index(i)*2-1:areas1_max_index(i)*2);
         center2_max(i,:) = center2(1,areas2_max_index(i)*2-1:areas2_max_index(i)*2);
     end
-   colors = colorcube(K);
     if show == true
         subplot(1,2,1), imshow(I1);
         hold on
         for i=1:size(center1_max,1)
-           plot(center1_max(i,1),center1_max(i,2),'o','Color',colors(i,:),'MarkerSize',10)
+           plot(center1_max(i,1),center1_max(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
         end
         subplot(1,2,2), imshow(I2);
         hold on
         for i=1:size(center2_max,1)
-            plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',10)
+            plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
         end
-        saveas(gcf,string("res/1_" + string(num) + ".jpg"));
+        saveas(gcf,string("res/" + string(num) + "_1.jpg"));
     end
 end

@@ -21,7 +21,7 @@ function epipolar1(img1, img2)
     
     %%find Fundamental Matrix
     [fLMedS,inliers] = estimateFundamentalMatrix(matchedPoints1.Location, matchedPoints2.Location);
-    save('F_KAZE', 'fLMedS');
+    save('results/F_KAZE', 'fLMedS');
     %epiLines in img1
     subplot(1,2,1),imshow(img1);
     hold on;
