@@ -16,7 +16,7 @@ for i=159:160
     for k=1:N
         videoFrame = insertMarker(videoFrame, center1(k,:), '+', 'Color', round(colors(k,:)*255));
     end
-    imwrite(videoFrame,string("res/" + string(i) + "_2.jpg"));
+    imwrite(videoFrame,string("res/" + string(i) + "_3.jpg"));
     %find equivalent of each marker
     matches = epi2(BW1, BW2, center1, center2, colors, N, i);
     %sorting

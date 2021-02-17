@@ -29,8 +29,8 @@ function mean_points = Tracker(videoFrame, colors, N, num)
             all_points{k} = points;
             all_trackers{k} = pointTracker;
             
-            save('results/all_points', 'all_points');
-            save('results/all_trackers', 'all_trackers');
+%             save('results/all_points', 'all_points');
+%             save('results/all_trackers', 'all_trackers');
             
             mean_points(k,:) = mean(points); 
             imshow(videoFrame);
