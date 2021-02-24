@@ -1,7 +1,7 @@
 N = 14;
 % frame2 = imread('results/first sequence/158_1.jpg');
 % SetMarkers(frame2,N);
-for i=159:160
+for i=160:161
     path = 'results/first sequence/' + string(i);
     frame2 = imread(path + '_1.jpg');
     frame3 = imread(path + '_2.jpg');
@@ -23,6 +23,8 @@ for i=159:160
     center2=SortMatches(matches,center2);%% sorted algorithm
     %get marker's 3d pose in the world coordinate 
     point3d = reconstruct3d(frame2, frame3, center1, center2); 
+    ExcelWriter(point3d);
+    
     draw(frame2, frame3, center1, center2, colors, i);
 end
 
