@@ -4,8 +4,8 @@ N = 14;
 sw=1;
 t2=1;
 t1=0;
-center_prev=double.empty(14,2);
-for i=158:161
+center_prev=zeros(14,2);
+for i=158:160
     path = 'results/first sequence/' + string(i);
     frame2 = imread(path + '_1.jpg');
     frame3 = imread(path + '_2.jpg');
@@ -13,20 +13,24 @@ for i=158:161
     %get marker centers
     colors = hsv(N);
     [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, true, i);
-    if(isempty(center_prev))
-     center_prev= center1;
-    [BW21, BW22, center21, center22] = markers(frame2, frame3, colors, N, true, i+1);
-     center1 =center21;
-    end
     
-    %tracking
+    if(all(center_prev(:)==0))
+     center_prev= center1;    
+    [BW1, BW2, center1t2, center2t2] = markers(frame2, frame3, colors, N, true, i+1);
+     center1 =center1t2;
+     center2=center2t2; 
+    end 
     if(sw==1)
+        disp("kk");
     %SetMarkers(frame2,N);
     center_prev=SortCenter1(center_prev);
     sw=3;
     else
+        disp("klll");
         if(sw==2)
-            [bvalue,centerNew]=TrackerNew(center_prev,center1,v,t2,t1,colors,N,i);
+            [bvalue,centerNew]=TrackerNew(center_prev,center1,v,t2,t1,colors,N,i,BW1);
+%             disp(centerNew);
+              disp("ko");
             if(bvalue==False)
                 sw=3;
             else
@@ -36,14 +40,13 @@ for i=158:161
             
         end
         if(sw==3)
-            v=CalculateV(center_prev,center1,t1,t2);
+            [v,center1]=CalculateV(center_prev,center1,t1,t2);
             sw=2;
+            disp("kp");
         end
      center_prev=center1; 
     end
-    mean_points = Tracker(center1,center21,t, colors, N, i);
-    matches = findMatches(center1, mean_points);
-    center1=SortMatches(matches,center1);
+
     videoFrame = frame2;
     for k=1:N   
         videoFrame = insertMarker(videoFrame, center1(k,:), '+', 'Color', round(colors(k,:)*255));
