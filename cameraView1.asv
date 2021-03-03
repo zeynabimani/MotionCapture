@@ -2,8 +2,6 @@ N = 14;
 %  frame2 = imread('results/first sequence/158_1.jpg');
 %  SetMarkers(frame2,N);
 sw=1;
-t2=1;
-t1=0;
 center_prev=double.empty(14,2);
 for i=158:161
     path = 'results/first sequence/' + string(i);
@@ -26,20 +24,13 @@ for i=158:161
     sw=3;
     else
         if(sw==2)
-            [bvalue,centerNew]=TrackerNew(center_prev,center1,v,t2,t1,colors,N,i);
-            if(bvalue==False)
-                sw=3;
-            else
-               center1=centerNew;
-            end
-            
+            b=TrackerNew(center_prev,center1)
             
         end
         if(sw==3)
-            v=CalculateV(center_prev,center1,t1,t2);
+            v=CalculateV(center_prev,center1);
             sw=2;
         end
-     center_prev=center1; 
     end
     mean_points = Tracker(center1,center21,t, colors, N, i);
     matches = findMatches(center1, mean_points);
