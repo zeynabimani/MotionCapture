@@ -10,10 +10,11 @@ function lineAllocate = epi2(img1, img2, center1, center2, colors, N, num)
     end
     marks = dists;
     for i=1:N
-        marks(i,:) = dists(i,:) < 6;
+        marks(i,:) = dists(i,:) < 10;
     end
     bad = [];
     bad_index = [];
+    %% markers in a line
     for i=1:N
         ch = find(marks(:,i) == 1);
         if size(ch,1) > 1
@@ -43,6 +44,28 @@ function lineAllocate = epi2(img1, img2, center1, center2, colors, N, num)
             marks(row2(1), row1(1)) = 1;
         end
     end
+    %% markers that have conflict and the conflict is the only answer for one ball
+    bad = [];
+    bad_index = [];
+    for i=1:N
+        ch = find(marks(:,i) == 1);
+        if size(ch,1) > 1
+            bad = [bad, ch];
+            bad_index = [bad_index, i];
+        end
+    end
+    
+     for j=1:size(bad_index,2)
+         for i=1:N
+            if marks(i,bad_index(j)) == 1
+                if sum(marks(i,:) == 1) == 1
+                    marks(:,bad_index(j)) = zeros(N,1);
+                    marks(i, bad_index(j)) = 1;
+                end
+            end
+        end
+    end
+    %% others
     bad = [];
     bad_index = [];
     for i=1:N
@@ -53,15 +76,14 @@ function lineAllocate = epi2(img1, img2, center1, center2, colors, N, num)
         end
     end
     for i=1:N
-        for j=1:size(bad_index,2)
-            if marks(i,bad_index(j)) == 1
-                if sum(marks(i,:) == 1) == 1
-                    marks(:,bad_index(j)) = zeros(N,1);
-                    marks(i, bad_index(j)) = 1;
-                end
-            end
+        if sum(marks(i,:) == 1) > 1
+            marks(i,:) = zeros(N,1);
+            j = find(dists(i,:) == min(dists(i,:)));
+            marks(i, j) = 1;
         end
     end
+    
+    %% end
     lineAllocate = zeros(1,N);
     for i=1:N
        lineAllocate(i) = find(marks(:,i) == 1);
