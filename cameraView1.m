@@ -45,7 +45,7 @@ for i=1:numel(myDir)
         end
     end
     %find equivalent of each marker
-    matches = epi2(BW1, BW2, center1, center2, colors, N, i);
+    matches = epi2(BW1, BW2, center1, center2, colors, N, name(1,1));
     %sorting
     center2=SortMatches(matches,center2);%% sorted algorithm
     %get marker's 3d pose in the world coordinate 
