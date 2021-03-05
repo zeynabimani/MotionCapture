@@ -15,7 +15,8 @@ for i=158:160
     [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, true, i);
     
     if(all(center_prev(:)==0))
-     center_prev= center1;    
+     center_prev= center1;
+     center2_prev=center2;
     [BW1, BW2, center1t2, center2t2] = markers(frame2, frame3, colors, N, true, i+1);
      center1 =center1t2;
      center2=center2t2; 
