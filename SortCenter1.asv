@@ -1,5 +1,0 @@
-function Center1=SortCenter1(Ct1)
-load('results/Centers');
-findMatches(Centers,
-
-end
