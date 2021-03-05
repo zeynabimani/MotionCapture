@@ -16,6 +16,7 @@ function [bVariable,point]=TrackerNew(Center1T1,Center1T2,v,t2,t1,Colors,N,num,B
     else
         point=Center1T2;
         bVariable=true;
+        figure
         imshow(BW1);
         hold on;
         for i=1:N
