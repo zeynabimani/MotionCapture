@@ -5,11 +5,11 @@ sw=1;
 t2=1;
 t1=0;
 center_prev=zeros(14,2);
-for i=158:160
+for i=158:161
     path = 'results/first sequence/' + string(i);
     frame2 = imread(path + '_1.jpg');
     frame3 = imread(path + '_2.jpg');
-   
+   i
     %get marker centers
     colors = hsv(N);
     [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, true, i);
@@ -17,6 +17,9 @@ for i=158:160
     if(all(center_prev(:)==0))
      center_prev= center1;
      center2_prev=center2;
+     BW1_prev=BW1;
+     BW2_prev=BW2;
+     
     [BW1, BW2, center1t2, center2t2] = markers(frame2, frame3, colors, N, true, i+1);
      center1 =center1t2;
      center2=center2t2; 
@@ -32,7 +35,7 @@ for i=158:160
             [bvalue,centerNew]=TrackerNew(center_prev,center1,v,t2,t1,colors,N,i,BW1);
 %             disp(centerNew);
               disp("ko");
-            if(bvalue==False)
+            if(bvalue==false)
                 sw=3;
             else
                center1=centerNew;
@@ -41,7 +44,15 @@ for i=158:160
             
         end
         if(sw==3)
-            [v,center1]=CalculateV(center_prev,center1,t1,t2);
+             subplot(1,1,1), imshow(BW1_prev);
+                hold on;
+                for j=1:N
+                plot(center_prev(j,1),center_prev(j,2),'o','Color',colors(j,:),'MarkerSize',5,'LineWidth',3);
+         
+                end
+           saveas(gcf,string("res/" + string(i) + "_9.jpg"));
+   
+            [v,center1]=CalculateV(center_prev,center1,t1,t2,BW1,N,colors,i);
             sw=2;
             disp("kp");
         end

@@ -10,7 +10,7 @@ function lineAllocate = epi2(img1, img2, center1, center2, colors, N, num)
     end
     marks = dists;
     for i=1:N
-        marks(i,:) = dists(i,:) < 5;
+        marks(i,:) = dists(i,:) < 6;
     end
     bad = [];
     bad_index = [];
