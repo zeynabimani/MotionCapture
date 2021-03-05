@@ -5,7 +5,7 @@ t_prev = 0;
 k = 1;
 center_prev=zeros(14,2);
 folder='results/test_imgs/sequence2/';  
-myDir=dir(fullfile(folder,'*.jpg'));d
+myDir=dir(fullfile(folder,'*.jpg'));
 for i=1:numel(myDir)
     
     fileName2=fullfile(folder,myDir(k).name);
