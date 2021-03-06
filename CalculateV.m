@@ -14,4 +14,5 @@ function [v,center2Sort]=CalculateV(centert1,centert2,t1,t2,BW1,N,Colors,num)
     v=zeros(1,2);
     v(1,1)=mean(centert1(:,1)-center2Sort(:,1))/tDiff;
     v(1,2)=mean(centert1(:,2)-center2Sort(:,2))/tDiff;
+    
 end
