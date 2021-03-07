@@ -1,43 +1,28 @@
-function mean_points = Tracker(videoFrame, colors, N, num)
-   load('results/all_points');
-   load('results/all_trackers');
-   colors = round(colors*255);
-   mean_points = zeros(N,2);
-   for k=1:length(all_points)
-        oldPoints = all_points{k};
-        pointTracker = all_trackers{k};
-        
-        [points, isFound] = step(pointTracker, videoFrame);
-        visiblePoints = points(isFound, :);
-        oldInliers = oldPoints(isFound, :);
-
-        if size(visiblePoints, 1) >= 2 % need at least 2 points
-            % Estimate the geometric transformation between the old points
-            % and the new points and eliminate outliers
-            [tform,oldInliers,visiblePoints] = estimateGeometricTransform(...
-                oldInliers, visiblePoints, 'similarity', 'MaxDistance', 4);
-
-            % Display tracked points
-            videoFrame = insertMarker(videoFrame, visiblePoints, '+', ...
-                'Color', colors(k,:));       
-            imwrite(videoFrame,string("res/" + string(num) + "_2.jpg"));
-            
-            % Reset the points
-            oldPoints = visiblePoints;
-            setPoints(pointTracker, oldPoints);        
-            
-            all_points{k} = points;
-            all_trackers{k} = pointTracker;
-            
-%             save('results/all_points', 'all_points');
-%             save('results/all_trackers', 'all_trackers');
-            
-            mean_points(k,:) = mean(points); 
-            imshow(videoFrame);
+function [bVariable,point]=tracker(Center1T1,Center1T2,v,t2,t1,Colors,N,show,num,BW1)
+    %sort Center1T2
+    point=zeros(N,2);
+    center_witherror=zeros(N,2);
+    tDiff = timeDiff(t1,t2);
+    center_witherror(:,1)=Center1T1(:,1)+(v(:,1).*tDiff);
+    center_witherror(:,2)=Center1T1(:,2)+(v(:,2).*tDiff);
+    matches=findMatches(center_witherror,Center1T2);  %sort unsort
+    Center1T2=SortMatches(matches,Center1T2);
+    %find err between center_witherror and Center1T2
+    err=sqrt((mean(center_witherror(:,1)-Center1T2(:,1)).^2)+(mean(center_witherror(:,2)-Center1T2(:,2)).^2));
+    thereshold=10;
+    if(err>thereshold)
+        bVariable=false;
+    else
+        point=Center1T2;
+        bVariable=true;
+        if show == true
+            figure
+            imshow(BW1);
+            hold on;
+            for i=1:N
+                plot(point(i,1),point(i,2),'o','Color',Colors(i,:),'MarkerSize',5,'LineWidth',3);
+            end
+            saveas(gcf,string("res/" + string(num) + "_3_tracker.jpg"));
         end
-   end
+    end
 end
-
-    
-    
-    

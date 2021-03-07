@@ -82,6 +82,6 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show,
         for i=1:size(center2_max,1)
             plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
         end
-        saveas(gcf,string("res/" + string(num) + "_1.jpg"));
+        saveas(gcf,string("res/" + string(num) + "_1_marker.jpg"));
     end
 end

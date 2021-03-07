@@ -34,13 +34,19 @@ while true
 %     point3d = reconstruct3d(frame2, frame3, center1, center2);     
     
     %saving images
-    path = 'check/12/' + string(counter);
-    imwrite(frame2,path + '_1.jpg');
-    imwrite(frame3,path + '_2.jpg');
+    path = 'check/15/' + string(counter);
+%     imwrite(frame2,path + '_1.jpg');
+%     imwrite(frame3,path + '_2.jpg');
+    
+    time = datestr(now,'HH:MM:SS.FFF');
+    time = strrep(time,':','-');
+    time = strrep(time,'.','%');
+    imwrite(frame2,path + '_' + time + '_1.jpg');
+    imwrite(frame3,path + '_' + time + '_2.jpg');
     counter = counter + 1;
     
 %     pause for one second
-    pause(1); 
+%     pause(1); 
 end
 
 
