@@ -31,7 +31,7 @@ function ExcelWriter()
     rate={'60','60','49','11','mm','60','1','151'};
    xlswrite('ExcelFile',rate,'Sheetname','A3');
     for j=1:length(Frame)
-        xlswrite('ExcelFile',cellstr(Frame(j)),'Sheetname',strcat('A',num2str(count)));
+        xlswrite('ExcelFile',j,'Sheetname',strcat('A',num2str(count)));
         xlswrite('ExcelFile',time(j),'Sheetname',strcat('B',num2str(count)));
        
          xlswrite('ExcelFile',pointNew(j,:),'Sheetname',strcat('C',num2str(count)));
@@ -42,6 +42,8 @@ function ExcelWriter()
     %     xlswrite('ExcelFile',{num2str(i)},'Sheetname',strcat('A',num2str(i+1)));
     %     xlswrite('ExcelFile',Point3d(i,1:3),'Sheetname',strcat('B',num2str(i+1)));
     % end
+    %foe write in one cell
+    %cellstr(Frame(j))
 end
 
 

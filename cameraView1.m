@@ -1,4 +1,4 @@
- %ExcelWriter();
+%  ExcelWriter();
 N = 11;
 sw = 1;
 t_now = "0:0:0";
@@ -6,9 +6,11 @@ t_prev = "0:0:0";
 global time;
 global pointNew;
 global Frame;
-duration=0;
+ time_out=0;
+ 
 k = 1;
 j=1;
+
 center1_prev=zeros(N,2);
 center2_prev=zeros(N,2);
 folder='results/test_imgs/sequence3/';  
@@ -78,16 +80,15 @@ for i=1:numel(myDir)
     point3d = reconstruct3d(frame2, frame3, center1, center2); 
  
     draw(frame2, frame3, center1, center2, colors, name(1,1));
-     if j==1
-       time_out=duration;
-     else
-         time_out=timeDiff(t_prev{1},t_now{1})+duration;
+    
+     if j~=1
+         time_out=timeDiff(t_prev{1},t_now{1})+time_out;
          
      end
    
    
    %save variables into array
-    time(j,:)= time_out;
+    time(j,:)= time_out/1000;
     pointNew(j,:)=point3d(:)';
     Frame(j,:)=name(1,1);
   
