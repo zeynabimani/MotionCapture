@@ -1,4 +1,4 @@
- %ExcelWriter();
+%  ExcelWriter();
 N = 11;
 sw = 1;
 t_now = "0:0:0";
@@ -6,7 +6,6 @@ t_prev = "0:0:0";
 global time;
 global pointNew;
 global Frame;
-duration=0;
 k = 1;
 j=1;
 center1_prev=zeros(N,2);
@@ -78,25 +77,23 @@ for i=1:numel(myDir)
     point3d = reconstruct3d(frame2, frame3, center1, center2); 
  
     draw(frame2, frame3, center1, center2, colors, name(1,1));
-     if j==1
-       time_out=duration;
-     else
-         time_out=timeDiff(t_prev{1},t_now{1})+duration;
-         
-     end
-   
-   
-   %save variables into array
-    time(j,:)= time_out;
-    pointNew(j,:)=point3d(:)';
-    Frame(j,:)=name(1,1);
   
+    t = {t_prev{1}};
+    td = duration(t,'inputformat','hh:mm:ss.SSS');
+    time_out = td;
+    time(j,:)= time_out;
+   
+     pointNew(j,:)=point3d(:)';
+   
+    Frame(j,:)=name(1,1);
+   if j==1
+       dura
     j=j+1;
     t_prev = t_now;
     center1_prev = center1;
     center2_prev = center2;
 end
-%save to file
+disp('ppp');
  save('results/timeDiff','time');
  save('results/point3d','pointNew');
  save('results/Frame','Frame'); 
