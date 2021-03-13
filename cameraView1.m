@@ -6,10 +6,10 @@ t_prev = "0:0:0";
 global time;
 global pointNew;
 global Frame;
- time_out=0;
+time_out=0;
  
 k = 1;
-j=1;
+j = 1;
 
 center1_prev=zeros(N,2);
 center2_prev=zeros(N,2);
@@ -26,7 +26,7 @@ for i=1:numel(myDir)
     
     fileName3=fullfile(folder,myDir(k).name);
     k = k+1;
-    if k>numel(myDir)
+    if k > numel(myDir)
         break;
     end
    
@@ -53,11 +53,8 @@ for i=1:numel(myDir)
         center2 = sortCenter(sortCnts2, center2);
         center2_prev = center2;
         sw = 3;
-        
     else
-        if sw == 2
-           
-           
+        if sw == 2 
             [bvalue,centerNew]=Tracker(center1_prev, center1, v, t_prev{1}, t_now{1}, colors, N, show, name(1,1), BW1);
             if(bvalue==false)
                 sw = 3;
@@ -66,10 +63,8 @@ for i=1:numel(myDir)
             end
         end
         if sw == 3 
-           
             [v,center1] = CalculateV(center1_prev, center1, t_prev{1}, t_now{1}, BW1, N, colors, show, name(1,1));
-            sw=2;
-           
+            sw=2;  
         end
     end
     %find equivalent of each marker
@@ -80,23 +75,21 @@ for i=1:numel(myDir)
     point3d = reconstruct3d(frame2, frame3, center1, center2); 
  
     draw(frame2, frame3, center1, center2, colors, name(1,1));
-    
-     if j~=1
-         time_out=timeDiff(t_prev{1},t_now{1})+time_out;
-         
-     end
-   
-   
-   %save variables into array
+    if j~=1
+    	time_out=timeDiff(t_prev{1},t_now{1})+time_out;
+    end
+
+    %save variables into array
     time(j,:)= time_out/1000;
     pointNew(j,:)=point3d(:)';
     Frame(j,:)=name(1,1);
-  
+
     j=j+1;
     t_prev = t_now;
     center1_prev = center1;
     center2_prev = center2;
 end
+
 %save to file
  save('results/timeDiff','time');
  save('results/point3d','pointNew');

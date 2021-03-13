@@ -24,12 +24,12 @@ function ExcelWriter()
     for i=1:3:33
         xlswrite('ExcelFile',var2(i),'Sheetname',strcat(varN(i),num2str(4)));
     end
-    A={'x1','y1','z1','x2','y2','z2','x3','y3','z3','x4','y4','z4','x5','y5','z5','x6','y6','z6','x7','y7','z7','x8','y8','z8','x9','y9','z9','x10','y10','z10','x11','y11','z11',};
+    A={'X1','Y1','Z1','X2','Y2','Z2','X3','Y3','Z3','X4','Y4','Z4','X5','Y5','Z5','X6','Y6','Z6','X7','Y7','Z7','X8','Y8','Z8','X9','Y9','Z9','X10','Y10','Z10','X11','Y11','Z11',};
     xlswrite('ExcelFile',A,'Sheetname','C5');
     count=7;
     %this is rate array for row3
-    rate={'60','60','49','11','mm','60','1','151'};
-   xlswrite('ExcelFile',rate,'Sheetname','A3');
+    rate={'6','6','49','11','mm','6','1','49'};
+    xlswrite('ExcelFile',rate,'Sheetname','A3');
     for j=1:length(Frame)
         xlswrite('ExcelFile',j,'Sheetname',strcat('A',num2str(count)));
         xlswrite('ExcelFile',time(j),'Sheetname',strcat('B',num2str(count)));
