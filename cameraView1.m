@@ -79,9 +79,14 @@ for i=1:numel(myDir)
     	time_out=timeDiff(t_prev{1},t_now{1})+time_out;
     end
 
+    newArr = [];
+    for l=1:N
+       newArr = [newArr, point3d(l,:)]; 
+    end
+    
     %save variables into array
     time(j,:)= time_out/1000;
-    pointNew(j,:)=point3d(:)';
+    pointNew(j,:)=newArr;
     Frame(j,:)=name(1,1);
 
     j=j+1;
