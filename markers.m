@@ -8,7 +8,7 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show,
     I2gray = rgb2gray(I2);
 
     %%thresholding
-    level = 45;
+    level = 35;
     BW1 = I1gray > level;
     BW2 = I2gray > level;
     subplot(1,2,1), imshow(BW1)
