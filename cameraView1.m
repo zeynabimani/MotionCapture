@@ -16,14 +16,10 @@ center2_prev=zeros(N,2);
 folder='results/test_imgs/sequence4/';  
 myDir=dir(fullfile(folder,'*.jpg'));
 show = false;
-time=zeros(numel(myDir),1);
-point3d_arr=zeros(numel(myDir),42);
-Frame=zeros(numel(myDir),1);
+
 for i=1:numel(myDir)
-    
     fileName2=fullfile(folder,myDir(k).name);
     k = k+1;
-    
     fileName3=fullfile(folder,myDir(k).name);
     k = k+1;
     if k > numel(myDir)
@@ -67,6 +63,7 @@ for i=1:numel(myDir)
             sw=2;  
         end
     end
+    
     %find equivalent of each marker
     matches = epi(BW1, BW2, center1, center2, center2_prev, colors, N, show, name(1,1));
     %sorting
@@ -93,9 +90,12 @@ for i=1:numel(myDir)
     t_prev = t_now;
     center1_prev = center1;
     center2_prev = center2;
+    
+    
+    %save to file
+    save('results/timeDiff','time');
+    save('results/point3d','pointNew');
+    save('results/Frame','Frame'); 
+
 end
 
-%save to file
- save('results/timeDiff','time');
- save('results/point3d','pointNew');
- save('results/Frame','Frame'); 
