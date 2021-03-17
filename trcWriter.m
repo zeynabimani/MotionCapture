@@ -10,12 +10,12 @@ fid_1 = fopen([pname newfilename],'w');
 
 % first write the header data
 fprintf(fid_1,'PathFileType\t4\t(X/Y/Z)\t %s\n',newfilename);
-data.Rate = 60;
-frameNum = 888;
+data.Rate = 30;
+frameNum = 443;
 nmarkers = 12;
 data.units = 'mm';
 data.Start_Frame = 1;
-data.End_Frame = 888;
+data.End_Frame = 443;
 fprintf(fid_1,'DataRate\tCameraRate\tNumFrames\tNumMarkers\tUnits\tOrigDataRate\tOrigDataStartFrame\tOrigNumFrames\n');
 fprintf(fid_1,'%d\t%d\t%d\t%d\t%s\t%d\t%d\t%d\n', data.Rate, data.Rate, frameNum, nmarkers, data.units, data.Rate,data.Start_Frame,data.End_Frame); 
 fprintf(fid_1,'Frame#\tTime\t');
