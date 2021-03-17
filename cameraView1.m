@@ -55,7 +55,7 @@ for i=1:numel(myDir)
         sw = 3;
     else
         if sw == 2 
-            [bvalue,centerNew]=tracker(center1_prev, center1, v, t_prev{1}, t_now{1}, colors, N, show, name(1,1), BW1);
+            [bvalue,centerNew]=Tracker(center1_prev, center1, v, t_prev{1}, t_now{1}, colors, N, show, name(1,1), BW1);
             if(bvalue==false)
                 sw = 3;
             else
@@ -63,7 +63,7 @@ for i=1:numel(myDir)
             end
         end
         if sw == 3 
-            [v,center1] = calculateV(center1_prev, center1, t_prev{1}, t_now{1}, BW1, N, colors, show, name(1,1));
+            [v,center1] = CalculateV(center1_prev, center1, t_prev{1}, t_now{1}, BW1, N, colors, show, name(1,1));
             sw=2;  
         end
     end

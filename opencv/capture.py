@@ -25,7 +25,7 @@ while True:
     if ret1:
         cv2.imshow('frame1', frame1)
         cv2.imwrite(path+now+'_1.jpg', frame1)
-    if ret1:
+    if ret2:
         cv2.imshow('frame2', frame2)
         cv2.imwrite(path+now+'_2.jpg', frame2)
     if cv2.waitKey(1) & 0xFF == ord('q'):
