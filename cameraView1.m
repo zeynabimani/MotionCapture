@@ -1,5 +1,5 @@
 %  ExcelWriter();
-N = 12;
+N = 14;
 sw = 1;
 t_now = "0:0:0";
 t_prev = "0:0:0";
@@ -13,11 +13,12 @@ j = 1;
 
 center1_prev=zeros(N,2);
 center2_prev=zeros(N,2);
-folder='results/test_imgs/sequence4/';  
+folder='results/test_imgs/sequence5/';  
 myDir=dir(fullfile(folder,'*.jpg'));
 show = false;
 
 for i=1:numel(myDir)
+    i
     fileName2=fullfile(folder,myDir(k).name);
     k = k+1;
     fileName3=fullfile(folder,myDir(k).name);
@@ -43,15 +44,15 @@ for i=1:numel(myDir)
     if sw == 1 
 %         sortCnts1 = SetMarkers(frame2,N,1);
 %         sortCnts2 = SetMarkers(frame3,N,2);
-        load('results/sortCnts1');
-        load('results/sortCnts2');
-        center1 = sortCenter(sortCnts1, center1);
-        center2 = sortCenter(sortCnts2, center2);
+        load('results/new_center1.mat');
+        load('results/new_center2.mat');
+        center1 = sortCenter(new_center1, center1);
+        center2 = sortCenter(new_center2, center2);
         center2_prev = center2;
         sw = 3;
     else
         if sw == 2 
-            [bvalue,centerNew]=Tracker(center1_prev, center1, v, t_prev{1}, t_now{1}, colors, N, show, name(1,1), BW1);
+            [bvalue,centerNew]=tracker(center1_prev, center1, v, t_prev{1}, t_now{1}, colors, N, show, name(1,1), BW1);
             if(bvalue==false)
                 sw = 3;
             else
@@ -59,7 +60,7 @@ for i=1:numel(myDir)
             end
         end
         if sw == 3 
-            [v,center1] = CalculateV(center1_prev, center1, t_prev{1}, t_now{1}, BW1, N, colors, show, name(1,1));
+            [v,center1] = calculateV(center1_prev, center1, t_prev{1}, t_now{1}, BW1, N, colors, show, name(1,1));
             sw=2;  
         end
     end
@@ -92,10 +93,15 @@ for i=1:numel(myDir)
     center2_prev = center2;
     
     
-    %save to file
-    save('results/timeDiff','time');
-    save('results/point3d','pointNew');
-    save('results/Frame','Frame'); 
+    if mod(i,10) == 0
+        %save to file
+        save('results/timeDiff','time');
+        save('results/point3d','pointNew');
+        save('results/Frame','Frame'); 
+    end
 
 end
 
+save('results/timeDiff','time');
+save('results/point3d','pointNew');
+save('results/Frame','Frame'); 

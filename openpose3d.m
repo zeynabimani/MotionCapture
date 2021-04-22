@@ -1,9 +1,9 @@
 
 
-for i=1:22
-str1=['matfiles/center1/data1_' num2str(i-1) '.mat'];
+for i=0:0
+str1=['results/test_imgs/sequence5/start/data1_' num2str(i-1) '.mat'];
 
-load(str1)
+load('results/test_imgs/sequence5/start/data1_0.mat')
 size(arr)
 
 center1=zeros(25,2);
@@ -14,9 +14,10 @@ center1=zeros(25,2);
     b=b+1;
     end
 center1
-str2=['matfiles/center2/data2_' num2str(i-1) '.mat'];
-load(str2)
-center2=zeros(25,2);
+save('center1')
+str2=['results/test_imgs/sequence5/start/data2_' num2str(i-1) '.mat'];
+load('results/test_imgs/sequence5/start/data2_0.mat')
+% center2=zeros(25,2);
  w=1;
     for n=1:3:75
     center2(w,1)=arr(1,n);
@@ -24,8 +25,9 @@ center2=zeros(25,2);
     w=w+1;
     end
 center2
-load('results/calibrationSession6.mat');
-point3d = triangulate(center1,center2,calibrationSession.CameraParameters);
-point3d
+save('center2')
+% load('results/calibrationSession6.mat');
+% point3d = triangulate(center1,center2,calibrationSession.CameraParameters);
+% point3d
 end
  
