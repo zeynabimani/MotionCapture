@@ -1,4 +1,4 @@
-function sortCnts = SetMarkers(videoFrame,N, index)
+function sortCnts = setMarkers(videoFrame,N, index)
     figure
     imshow(videoFrame);
     zoom on;

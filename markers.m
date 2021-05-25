@@ -1,8 +1,5 @@
 function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show, num)
 
-    % I1 = imread("75_1.jpg");
-    % I2 = imread("75_2.jpg");
-
     %%single channel image
     I1gray = rgb2gray(I1);
     I2gray = rgb2gray(I2);
@@ -13,8 +10,6 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show,
     BW2 = I2gray > level;
     subplot(1,2,1), imshow(BW1)
     subplot(1,2,2), imshow(BW2)
-
-%%%     k = 1; %number of markers in the image view
 
     %%find contours
     %%find eareas of all contours
@@ -75,12 +70,12 @@ function [BW1, BW2, center1_max, center2_max] = markers(I1, I2, colors, K, show,
         subplot(1,2,1), imshow(I1);
         hold on
         for i=1:size(center1_max,1)
-           plot(center1_max(i,1),center1_max(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
+           plot(center1_max(i,1),center1_max(i,2),'o','Color',colors(i,:),'MarkerSize',2,'LineWidth',2)
         end
         subplot(1,2,2), imshow(I2);
         hold on
         for i=1:size(center2_max,1)
-            plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',5,'LineWidth',3)
+            plot(center2_max(i,1),center2_max(i,2),'o','Color',colors(i,:),'MarkerSize',2,'LineWidth',2)
         end
         saveas(gcf,string("res/" + string(num) + "_1_marker.jpg"));
     end

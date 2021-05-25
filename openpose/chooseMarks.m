@@ -1,5 +1,5 @@
-load('results\test_imgs\sequence5\start\center1');
-load('results\test_imgs\sequence5\start\center2');
+load('center1');
+load('center2');
 
 NumberOfMarks = 14;
 new_center1 = zeros(NumberOfMarks,2);

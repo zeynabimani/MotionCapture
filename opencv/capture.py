@@ -15,12 +15,12 @@ height = int(capture1.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = capture1.get(cv2.CAP_PROP_FPS)
 
 print(width, height, fps)
-
+#path+now+_
 counter = 1
 while True:
     ret1, frame1 = capture1.read()
     ret2, frame2 = capture2.read()
-    path = 'check/1/' + str(counter) + '_'
+    path = 'check/9/' + str(counter) + '_'
     now = datetime.now().strftime('_%H-%M-%S~%f')[:-4]
     if ret1:
         cv2.imshow('frame1', frame1)

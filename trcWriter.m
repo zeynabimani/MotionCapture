@@ -11,8 +11,8 @@ fid_1 = fopen([pname newfilename],'w');
 % first write the header data
 fprintf(fid_1,'PathFileType\t4\t(X/Y/Z)\t %s\n',newfilename);
 data.Rate = 30;
-frameNum = 443;
-nmarkers = 12;
+frameNum = 200;
+nmarkers = 14;
 data.units = 'mm';
 data.Start_Frame = 1;
 data.End_Frame = 443;
@@ -20,7 +20,7 @@ fprintf(fid_1,'DataRate\tCameraRate\tNumFrames\tNumMarkers\tUnits\tOrigDataRate\
 fprintf(fid_1,'%d\t%d\t%d\t%d\t%s\t%d\t%d\t%d\n', data.Rate, data.Rate, frameNum, nmarkers, data.units, data.Rate,data.Start_Frame,data.End_Frame); 
 fprintf(fid_1,'Frame#\tTime\t');
 %%should change when the namber of markers are changed
-names = {'Center1','Center2','R.A','L.A','R.B','L.B','R.C','L.C','R.D','L.D','R.E','L.E'};
+names = {'Center1','Center2','R.A','L.A','R.B','L.B','R.C','L.C','R.D','L.D','R.E','L.E','R.F','L.F'};
 for i=1:nmarkers
     n = names(1,i);
     fprintf(fid_1,'%s\t\t\t', n{1});

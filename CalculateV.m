@@ -1,6 +1,6 @@
 function [v,center2Sort]=calculateV(centert1,centert2,t1,t2,BW1,N,Colors,show,num)
     matches=findMatches(centert1,centert2); %sort unsort
-    center2Sort=SortMatches(matches,centert2);
+    center2Sort=sortMatches(matches,centert2);
     %find v
     tDiff = timeDiff(t1,t2);
     v=zeros(1,2);

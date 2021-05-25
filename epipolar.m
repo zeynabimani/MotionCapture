@@ -8,7 +8,6 @@ I2gray = rgb2gray(I2);
 
 epipolar1(I1gray, I2gray)
 
-
 function epipolar1(img1, img2)
     %%detect match point between images
     points1 = detectKAZEFeatures(img1);

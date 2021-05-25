@@ -1,4 +1,4 @@
-function Center2=SortMatches(maches,center2)
+function Center2=sortMatches(maches,center2)
     Center2=zeros(length(maches),2);
     for i=1:(length(maches))
         if maches(i)~=i

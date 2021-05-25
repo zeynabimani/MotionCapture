@@ -42,8 +42,8 @@ for i=1:numel(myDir)
     [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, show, name(1,1));
  
     if sw == 1 
-%         sortCnts1 = SetMarkers(frame2,N,1);
-%         sortCnts2 = SetMarkers(frame3,N,2);
+%         sortCnts1 = setMarkers(frame2,N,1);
+%         sortCnts2 = setMarkers(frame3,N,2);
         load('results/new_center1.mat');
         load('results/new_center2.mat');
         center1 = sortCenter(new_center1, center1);
@@ -68,7 +68,7 @@ for i=1:numel(myDir)
     %find equivalent of each marker
     matches = epi(BW1, BW2, center1, center2, center2_prev, colors, N, show, name(1,1));
     %sorting
-    center2=SortMatches(matches,center2);
+    center2=sortMatches(matches,center2);
     %get marker's 3d pose in the world coordinate 
     point3d = reconstruct3d(frame2, frame3, center1, center2); 
  
