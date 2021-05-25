@@ -20,7 +20,7 @@ fprintf(fid_1,'DataRate\tCameraRate\tNumFrames\tNumMarkers\tUnits\tOrigDataRate\
 fprintf(fid_1,'%d\t%d\t%d\t%d\t%s\t%d\t%d\t%d\n', data.Rate, data.Rate, frameNum, nmarkers, data.units, data.Rate,data.Start_Frame,data.End_Frame); 
 fprintf(fid_1,'Frame#\tTime\t');
 %%should change when the namber of markers are changed
-names = {'Center1','Center2','R.A','L.A','R.B','L.B','R.C','L.C','R.D','L.D','R.E','L.E','R.F','L.F'};
+names = {'chest','center_waist','left_shoulder','left_elbow','right_shoulder','right_elbow','left_waist','left_knee','left_ankle','left_foot','right_waist','right_knee','right_ankle','right_foot'};
 for i=1:nmarkers
     n = names(1,i);
     fprintf(fid_1,'%s\t\t\t', n{1});
