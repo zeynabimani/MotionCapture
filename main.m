@@ -1,4 +1,3 @@
-%  ExcelWriter();
 N = 14;
 sw = 1;
 t_now = "0:0:0";
@@ -39,8 +38,10 @@ for i=1:numel(myDir)
 
     %get marker centers
     colors = hsv(N);
-    [BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, show, name(1,1));
- 
+    [is_ok, BW1, BW2, center1, center2] = markers(frame2, frame3, colors, N, show, name(1,1));
+    if is_ok == false
+        break
+    end
     if sw == 1 
 %         sortCnts1 = setMarkers(frame2,N,1);
 %         sortCnts2 = setMarkers(frame3,N,2);
