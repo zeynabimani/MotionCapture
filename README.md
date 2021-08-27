@@ -1,7 +1,7 @@
 # Motion Capture
 Marker_based motion capture system detect skeleton movement
 
-![Alt Text](https://ucarecdn.com/0dec59c8-4fad-48c3-adfe-30adfe82ca68/)
+![Motion Capture Demo](https://file.io/hGIuA1ohQMp2)
 
 ## Requirements
 
